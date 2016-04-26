@@ -1,0 +1,8 @@
+{% extends "layout.html" %}
+{% block body %}
+  {% for entry in entries %}
+    <li><h2>{{ entry.title }}</h2>{{ entry.body|safe }}
+  {% else %}
+    <li><em>No entries here so far</em>
+  {% endfor %}
+{% endblock %}
