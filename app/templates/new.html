@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+{% block body %}
+	<h1>New Entry</h1>
+	<form action="" method="POST" name="new">
+		{{ form.hidden_tag() }}
+		<p>
+			Title: </br>
+			{{ form.title }}
+		</p>
+		<p>
+			Body: </br>
+			{{ form.body }}
+		</p>
+		<p><input type="submit" value="submit"></p>
+	</form>
+{% endblock %}
