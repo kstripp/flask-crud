@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 {% block body %}
   {% for entry in entries %}
-	  <li><a href="{{ url_for("show", entry.id) }}" >{{ entry.title }}</a></li>
+	  <li><a href="{{ url_for("show_entry", id=entry.id) }}" >{{ entry.title }}</a></li>
   {% else %}
     <li><em>No entries here so far</em>
   {% endfor %}
