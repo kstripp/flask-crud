@@ -36,7 +36,7 @@ def edit_entry(id):
         post.body = form.body.data
         db.session.add(post)
         db.session.commit()
-        return redirect(url_for('index'))
+        return redirect(url_for('show_entry', id=id))
     else:
         form.title.default = post.title
         form.body.default = post.body

@@ -38,6 +38,11 @@ class EmptyDBTestCase(DBInit):
         #print rv
         assert "404" in rv.data
 
+    def test_new_message_form(self):
+        retval = self.app.get('/new')
+        assert "Title:" in retval.data
+        assert "Body:" in retval.data
+
     def test_new_message(self):
         retval = self.app.post('/new', data = dict(
             title="Hello",
@@ -45,6 +50,12 @@ class EmptyDBTestCase(DBInit):
             follow_redirects=True)
         assert "No entries" not in retval.data
         assert "Hello" in retval.data
+
+    def test_new_message_link_empty(self):
+        """ Button to add new message should be visible 
+        regardless of entries in database"""
+        retval = self.app.get('/')
+        assert "New Entry" in retval.data
 
 class CrudDBTestCase(DBInit):
 
@@ -62,8 +73,15 @@ class CrudDBTestCase(DBInit):
     def tearDown(self):
         DBInit.tearDown(self)
 
+    def test_new_message_link_non_empty(self):
+        """ Button to add new message should be visible 
+        regardless of entries in database"""
+        retval = self.app.get('/')
+        assert "New Entry" in retval.data
+
     def test_show_message(self):
         retval =  self.app.get('/show/1')
+        assert "Edit Entry" in retval.data
         assert "Hello" in retval.data
         assert "Test Message" in retval.data
         assert "Another" not in retval.data
